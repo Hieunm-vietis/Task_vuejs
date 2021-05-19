@@ -25,10 +25,6 @@
 </template>
 
 <script>
-    import db from "../../config/firebaseconfig";
-    import firebase from 'firebase'
-    const users = db.ref("/users");
-
     export default {
         name: 'Register',
         data(){
@@ -46,20 +42,11 @@
         },
         methods: {
             registerUser(){
-                firebase.auth().createUserWithEmailAndPassword(this.userData.email, this.userData.password)
-                .then((user) => {
-                    console.log(user);
-                    firebase.auth().currentUser.updateProfile({
-                        displayName: this.userData.username
-                    }).then(() => {
-                        this.userData.password = '';
-                        users.push(this.userData);
-                    }).catch(err => {
-                        this.errorMessage = err.message;
-                    });
-                })
+                this.$store
+                .dispatch('register', this.userData)
+                .then(() => this.$router.push('/login'))
                 .catch(err => {
-                    this.errorMessage = err.message
+                    console.log(err);
                 });
             }
         }

@@ -4,7 +4,7 @@ import Register from '../components/Auth/Register.vue'
 import Login from '../components/Auth/Login.vue'
 import Task from '../components/Tasks/Index.vue'
 // import firebase from 'firebase';
-import store from '../store/store.js';
+// import store from '../store/store.js';
 
 Vue.use(VueRouter); 
 
@@ -29,19 +29,19 @@ const routes = [
         routes,
     });
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.authRequired)) {
-        if (store.state.user.uid) {
-            next();
-        } else {
-            alert('You must be logged in to see this page');
-            next({
-                path: '/login',
-            });
-        }
-    } else {
-        next();
-    }
-});
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.authRequired)) {
+//         if (store.state.user.uid) {
+//             next();
+//         } else {
+//             alert('You must be logged in to see this page');
+//             next({
+//                 path: '/login',
+//             });
+//         }
+//     } else {
+//         next();
+//     }
+// });
 
 export default router;
