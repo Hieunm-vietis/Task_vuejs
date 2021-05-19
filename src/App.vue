@@ -1,18 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app mt-0">
+    <my-header></my-header>
+    <div class="row justify-content-md-center">
+        <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './layouts/Header'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    components:{
+        'my-header': Header,
+    },
+    data() {
+        return {
+            data: {},
+            tasks: {},
+        }
+    },
+    created() {
+    },
+    methods: {
+    }
 }
 </script>
 
