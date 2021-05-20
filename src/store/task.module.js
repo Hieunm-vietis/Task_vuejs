@@ -1,34 +1,6 @@
-
-// Vue.use(Vuex)
-// export default new Vuex.Store({
-//     state: {
-//         tasks: [],
-//         user: []
-//     },
-//     getters: {
-//     },
-//     mutations: {
-//         SetDataTasks(state, data) {
-//             state.tasks = data;
-//         },
-//         SetUserLogin(state, data) {
-//             state.user = data;
-//         }
-//     },
-//     plugins: [
-//         createPersistedState({
-//             getState: (user) => Cookies.getJSON(user),
-//             setState: (user, state) => Cookies.set(user, state, { expires: 3, secure: true })
-//         })
-//     ]
-// })
-
-// import * as Cookies from 'js-cookie'
-// import createPersistedState from 'vuex-persistedstate'
-// import firebase from 'firebase'
 import firebase from "../config/firebaseconfig";
 import store from "./store";
-const dataTask = firebase.ref("/tasks");
+
 const state = {
     tasks: {},
     success: ''
@@ -42,7 +14,7 @@ const getters = {
 
 const actions = {
     getAllTask({ commit }) {
-        console.log(2112112);
+        const dataTask = firebase.ref("/tasks")
         const tasksData = []
         dataTask.orderByChild("status").on("child_added", snap => {
             tasksData.push({
@@ -55,16 +27,19 @@ const actions = {
         commit('SetDataTasks', tasksData);
     },
     createTask({ commit }, newTask) {
+        const dataTask = firebase.ref("/tasks")
         dataTask.push(newTask);
         commit('SetSucess', 'success');
         store.dispatch('getAllTask');
     },
     removeTask({ commit }, key) {
+        const dataTask = firebase.ref("/tasks")
         dataTask.child(key).remove();
         commit('SetSucess', 'success');
         store.dispatch('getAllTask');
     },
     updateStatus({ commit }, task) {
+        const dataTask = firebase.ref("/tasks")
         dataTask.child(task.key).set({
             status: !task.status,
             name: task.name,

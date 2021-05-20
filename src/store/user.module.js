@@ -61,6 +61,13 @@ const actions = {
         .catch(err => {
             commit('SetErrorAuth', err.message);
         });
+    },
+    logout({ commit }) {
+        firebase.auth().signOut().then(() => {
+            firebase.auth().onAuthStateChanged(() => {
+                commit('SetUserLogin', null);
+            })
+        })
     }
 };
 

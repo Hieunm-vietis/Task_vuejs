@@ -18,16 +18,12 @@
 </template>
 
 <script>
-import firebase from "firebase";
     export default {
         methods: {
             logout() {
-                firebase.auth().signOut().then(() => {
-                    firebase.auth().onAuthStateChanged(() => {
-                        this.$store.commit('SetUserLogin', null);
-                        this.$router.push('/login')
-                    })
-                })
+                this.$store
+                .dispatch('logout', this.userData)
+                .then(() => this.$router.push('/login'));
             }
         }
     }
