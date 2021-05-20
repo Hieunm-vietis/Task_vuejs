@@ -22,7 +22,6 @@ export default {
         }
     },
     created() {
-      console.log(this.$store.state.user.user);
     },
     methods: {
     }
