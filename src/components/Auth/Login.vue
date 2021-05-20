@@ -16,8 +16,6 @@
 </template>
 
 <script>
-    import firebase from 'firebase'
-
     export default {
         name: 'Register',
         data(){
@@ -31,16 +29,21 @@
             }
         },
         methods: {
-            loginUser(){
-                firebase.auth()
-                .signInWithEmailAndPassword(this.userData.email, this.userData.password)
-                .then(() => {
-                    this.$store.commit('SetUserLogin', firebase.auth().currentUser);
-                    this.$router.push('/')
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+            loginUser() {
+                this.$store
+                .dispatch('login', this.userData)
+                .then(() => this.$router.push('/'));
+                
+                
+                // firebase.auth()
+                // .signInWithEmailAndPassword(this.userData.email, this.userData.password)
+                // .then(() => {
+                //     this.$store.commit('SetUserLogin', firebase.auth().currentUser);
+                //     this.$router.push('/')
+                // })
+                // .catch((error) => {
+                //     alert(error.message);
+                // });
             }
         }
     }
