@@ -10,6 +10,20 @@ const getters = {
     getAllTasks(state) {
         return state.tasks;
     },
+    getAllTaskscalendar(state) {
+        const taskCalendar = [];
+        state.tasks.forEach((x) => {
+            taskCalendar.push({
+                dates: x.date_end,
+                customData: {
+                    name: x.name
+                },
+                name: x.name
+            });
+        });
+
+        return taskCalendar;
+    }
 };
 
 const actions = {
@@ -21,7 +35,9 @@ const actions = {
                 key: snap.key,
                 name: snap.val().name,
                 status: snap.val().status,
-                user_id: snap.val().user_id
+                user_id: snap.val().user_id,
+                date_end: snap.val().date_end,
+                dates: snap.val().dates
             });
         });
         commit('SetDataTasks', tasksData);
@@ -44,6 +60,7 @@ const actions = {
             status: !task.status,
             name: task.name,
             user_id: task.user_id,
+            date_end: task.date_end,
         });
         commit('SetSucess', 'success');
         store.dispatch('getAllTask');

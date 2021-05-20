@@ -45,15 +45,12 @@ const actions = {
             commit('SetUserLogin', firebase.auth().currentUser);
         })
         .catch((error) => {
-            console.log(1111122);
             alert(error.message);
         });
     },
     register({ commit }, user) {
-        console.log(11222,user);
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
         .then((user) => {
-            console.log(11222,user);
             firebase.auth().currentUser.updateProfile({
                 displayName: user.username
             })

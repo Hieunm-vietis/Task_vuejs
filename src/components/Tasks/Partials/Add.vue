@@ -14,23 +14,26 @@
 <script>
     export default {
         data() {
+            const month = new Date().getMonth();
+            const year = new Date().getFullYear();
+            const day = new Date().getDay();
+            const date = new Date(year, month, day).toString();
             return {
                 newTask: {
                     name : '',
                     decription : '',
                     status : false,
-                    user_id: ''
+                    user_id: '',
+                    date_end: date
                 },
             }
         },
         methods: {
             CreateTask() {
                 this.newTask.user_id = 'vPO1OCs95GdNrGp65TFT56GlvtZ2';
-
                 this.$store
                 .dispatch('createTask', this.newTask)
                 .then(() => {
-                    console.log(1111);
                     this.newTask.name = ''
                 })
                 .catch(err => {
@@ -39,7 +42,6 @@
             }
         },
         created() {
-            console.log(this.$store.state.user.user);
         }
     }
 </script>
