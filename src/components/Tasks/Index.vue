@@ -65,15 +65,15 @@
 </template>
 
 <script>
-    import Header from './Partials/Header'
-    import AddTask from './Partials/Add'
+    import Header from './Partials/Header.vue'
+    import AddTask from './Partials/Add.vue'
     import store from "../../store/store";
     export default {
         components:{
             'my-header': Header,
             'my-addTask': AddTask,
         },
-        data() {
+            data() {
             return {
                 task: {
                     name: '',

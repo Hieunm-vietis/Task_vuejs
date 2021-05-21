@@ -5,7 +5,7 @@
                 <input type="text" v-model="newTask.name" class="form-control" placeholder="New Task" aria-label="Username" aria-describedby="basic-addon1">
             </div>
         </div>
-        <div class="text-start col-3">
+        <div class="text-start col-3">   
             <button type="button" @click="CreateTask()" class="btn btn-primary">Add</button>
         </div>
     </div>
@@ -14,17 +14,19 @@
 <script>
     export default {
         data() {
-            const month = new Date().getMonth();
-            const year = new Date().getFullYear();
-            const day = new Date().getDay();
-            const date = new Date(year, month, day).toString();
+            // const month = new Date().getMonth();
+            // const year = new Date().getFullYear();
+            // const day = new Date().getDay();
+            // const date = new Date(year, month, day).toString();
+            var d = new Date();
+            var date = d.toString();
             return {
                 newTask: {
                     name : '',
                     decription : '',
                     status : false,
                     user_id: '',
-                    date_end: date
+                    date_end: date,
                 },
             }
         },
